@@ -1,0 +1,38 @@
+# Tables in users.db
+CREATE TABLE users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username TEXT NOT NULL,
+    hash TEXT NOT NULL,
+    budget NUMERIC,
+    period INTEGER,
+    start DATE
+    );
+
+CREATE TABLE goals(
+    id INTEGER,
+    item TEXT,
+    amount NUMERIC,
+    deadline DATE,
+    FOREIGN KEY (id) REFERENCES users(id)
+    );
+
+CREATE TABLE expenses(
+    id INTEGER,
+    date DATE,
+    amount NUMERIC,
+    type_general TEXT,
+    type_specific TEXT,
+    repeat TEXT,
+    repeat_times INTEGER,
+    FOREIGN KEY (id) REFERENCES users(id)
+    );
+
+CREATE TABLE income(
+    id INTEGER,
+    date DATE,
+    amount NUMERIC,
+    type TEXT,
+    repeat TEXT,
+    repeat_times INTEGER,
+    FOREIGN KEY (id) REFERENCES users(id)
+    );

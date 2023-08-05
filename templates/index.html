@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-7">
+            <h3>Current Period</h3>
+            <h5>${{budgets["budget"]}} per {{budgets["period"]}}</h5>
+                <ul class="list-group text-start">
+                    <li class="list-group-item">Current period start date: {{budgets["start"]}}</li>
+                    <li class="list-group-item">Total expenses in current period: ${{period_expenses["amount"]}}</li>
+                    <li class="list-group-item">Total income in current period: ${{period_incomes["amount"]}}</li>
+                    <li class="list-group-item">$ {{calculate["current_limit"]}} until budget limit reached</li>
+                    <li class="list-group-item">$ {{calculate["current_save"]}} saved from current period</li>
+                </ul>
+
+            <h5 class="space-text">Total Savings: ${{calculate["total_savings"]}}</h5>
+        </div>
+    </div>
+</div>
+
+
+    <h4 class="pad">Expenses</h4>
+    <h6>Total expenses: ${{total_expenses["amount"]}}</h6>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Repeat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
+                        <tr>
+                            <td>{{expense["date"]}}</td>
+                            <td>{{expense["type_general"]}}: {{expense["type_specific"]}}</td>
+                            <td>{{expense["amount"]}}</td>
+                            {% if (expense["repeat_times"] == none or expense["repeat"] == none) %}
+                              <td>None</td>
+                            {% else %}
+                              <td>{{ expense["repeat_times"] }} times, {{ expense["repeat"] }}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="pad">Incomes</h4>
+    <h6>Total income: ${{total_incomes["amount"]}}</h6>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Repeat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for income in incomes %}
+                        <tr>
+                            <td>{{income["date"]}}</td>
+                            <td>{{income["type"]}}</td>
+                            <td>{{income["amount"]}}</td>
+                            {% if (income["repeat_times"] == none or income["repeat"] == none) %}
+                              <td>None</td>
+                            {% else %}
+                              <td>{{ income["repeat_times"] }} times, {{ income["repeat"] }}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="pad">Goals</h4>
+    {% for goal in goals %}
+    <div class="row justify-content-center">
+        <div class="col-3 text-end">
+            Item: {{goal["item"]}}
+        </div>
+        <div class="col-6 d-flex justify-content-center">
+            <div class="custom-progress">
+                <div class="progress ">
+                    <div class="progress-bar " role="progressbar" style="width: {{goal["now"]}}%;" aria-valuenow="{{goal["now"]}}" aria-valuemin="0" aria-valuemax="{{goal["amount"]}}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 text-start">
+            ${{goal["amount"]}}
+        </div>
+
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+label{margin-left: 20px;}
+#datepicker{width:180px;}
+#datepicker > span:hover{cursor: pointer;}
+
+.custom-progress {
+    width: 50vw;
+}
+
+.pad {
+    padding-top: 50px;
+  }
+
+.space-text{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.custom-nav {
+    background-color: #4A6B5B;
+    color: #F0F6F3;
+}
+
+.list-group-item {
+    background-color: #C2DBCF;
+  }
+
+.list-group-item:hover {
+    background-color: #FCFDF6;
+}

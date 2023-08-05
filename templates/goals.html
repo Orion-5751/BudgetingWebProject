@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Saving Goals
+{% endblock %}
+
+{% block main %}
+    <h3>Saving Goals</h3>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Amount/Cost</th>
+                            <th>Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for goal in goals %}
+                        <tr>
+                            <td>{{goal["item"]}}</td>
+                            <td>{{goal["amount"]}}</td>
+                            <td>{{goal["deadline"]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <form action="/goals" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="item" name="item" placeholder="Item Name" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="amount" name="amount" placeholder="Budget" type="number" min="0" step="0.01">
+        </div>
+
+        <div class="container">
+            <label>Select Date: </label>
+            <div id="datepicker" class="input-group date container-fluid py-3 text-center" data-date-format="yyyy-mm-dd">
+                <input id="date" name="date" class="form-control" type="date" readonly />
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Set</button>
+    </form>
+
+{% endblock %}
+
+
